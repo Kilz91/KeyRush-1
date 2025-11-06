@@ -2058,7 +2058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleporteController
   destinationsAleatoires:
-  - nomScene: SampleVertical
+  - nomScene: SceneIce
     spawnId: NextStage
     poids: 1
   - nomScene: SceneHorizontal

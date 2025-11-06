@@ -66,7 +66,7 @@ public class WinManager : MonoBehaviour
             var rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.velocity = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
                 rb.isKinematic = true;
             }
 
@@ -83,6 +83,7 @@ public class WinManager : MonoBehaviour
         // Activate win sprite (if assigned) and bring camera to the desired position
         if (winSprite != null)
         {
+            Debug.Log($"WinManager.TriggerWin: winSprite assigned name={winSprite.name} activeBefore={winSprite.activeSelf}", this);
             // Move camera first so the sprite can be positioned relative to view
             if (Camera.main != null)
             {
@@ -92,13 +93,30 @@ public class WinManager : MonoBehaviour
             var cam = Camera.main;
             if (cam != null)
             {
+                // Parent the win sprite to the camera so it's always visible on screen
+                // even if there's no UI system in the project.
+                winSprite.transform.SetParent(cam.transform, worldPositionStays: true);
+                // place the sprite at the center of the camera view (z = 0 for sprite plane)
                 winSprite.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, 0f);
+                // make the sprite a child of camera but keep it in front of camera
+                // (if needed, offset slightly on Z)
+                winSprite.transform.SetAsLastSibling();
             }
 
-            var sr = winSprite.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.sortingOrder = 32767;
+            var sr = winSprite.GetComponentInChildren<SpriteRenderer>(true);
+            if (sr != null)
+            {
+                sr.sortingOrder = 32767;
+                sr.enabled = true;
+                Debug.Log($"WinManager.TriggerWin: found SpriteRenderer on winSprite (sprite={sr.sprite}) sortingOrder set to {sr.sortingOrder}", this);
+            }
+            else
+            {
+                Debug.LogWarning("WinManager.TriggerWin: no SpriteRenderer found on winSprite; will fall back to IMGUI if nothing visible", this);
+            }
 
             winSprite.SetActive(true);
+            Debug.Log($"WinManager.TriggerWin: winSprite activeAfter={winSprite.activeSelf} position={winSprite.transform.position}", this);
         }
         else
         {

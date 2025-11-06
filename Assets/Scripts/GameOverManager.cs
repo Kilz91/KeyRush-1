@@ -26,7 +26,7 @@ public class GameOverManager : MonoBehaviour
             var rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.velocity = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
                 rb.isKinematic = true;
             }
 

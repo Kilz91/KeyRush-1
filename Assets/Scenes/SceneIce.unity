@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b88924fea847558ca4b6490ab34ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPoint
-  spawnId: NextStage
+  spawnId: 
   preserveZ: 1
 --- !u!61 &579663084
 BoxCollider2D:
@@ -3569,12 +3569,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579663082}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.6, y: -2.36, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.611908, y: 2.3458002, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1585222930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &663347510
 GameObject:
@@ -3813,20 +3813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8db0055a988840228c6507ee52edddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleporteController
-  destinationsAleatoires:
-  - nomScene: SceneIce
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneJungle
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneMine
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneChateau
-    spawnId: NextStage
-    poids: 1
-  exclureSceneCourante: 1
+  sequenceSpawnId: SceneIce_to_SceneJungle
 --- !u!61 &1414455475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3939,12 +3926,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414455472}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.55, y: 28.57, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5619087, y: 33.2758, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1585222930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420019119
 GameObject:
@@ -4706,13 +4693,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd2472625c30c74d9a44800bf1d1b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShrinkingWall
-  speed: 0.1
-  expandSpeed: 0.2
+  speed: 1
+  expandSpeed: 0
   fromTop: 0
   fromBottom: 0
   fromLeft: 0
   fromRight: 1
-  gameOverManager: {fileID: 0}
+  gameOverManager: {fileID: 23506608}
   squeezeDistance: 0.5
   blockerMask:
     serializedVersion: 2
@@ -4943,6 +4930,39 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1585222929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1585222930}
+  m_Layer: 0
+  m_Name: Porte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1585222930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585222929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 37.98809, y: -4.7058, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1414455477}
+  - {fileID: 579663086}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650411417
 GameObject:
   m_ObjectHideFlags: 0
@@ -5365,61 +5385,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _target: {fileID: 217621442}
   _offset: {x: 0, y: 2, z: -10}
---- !u!1 &1947317821
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1947317823}
-  - component: {fileID: 1947317822}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &1947317822
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947317821}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!4 &1947317823
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947317821}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1943544147}
-  - {fileID: 1414455477}
-  - {fileID: 579663086}
+  - {fileID: 217621442}
+  - {fileID: 1585222930}
+  - {fileID: 663347512}
+  - {fileID: 1678941761}
   - {fileID: 23506610}
   - {fileID: 1305175464}
-  - {fileID: 1678941761}
-  - {fileID: 663347512}
-  - {fileID: 1947317823}
   - {fileID: 162509196}
-  - {fileID: 217621442}

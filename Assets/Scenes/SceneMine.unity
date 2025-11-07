@@ -6788,50 +6788,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!1 &1194696497
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194696499}
-  - component: {fileID: 1194696498}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &1194696498
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194696497}
-  m_Enabled: 1
-  m_CellSize: {x: 0.16, y: 0.16, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!4 &1194696499
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194696497}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1215170095
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,13 +7227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd2472625c30c74d9a44800bf1d1b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShrinkingWall
-  speed: 0.1
-  expandSpeed: 0.2
+  speed: 1
+  expandSpeed: 0
   fromTop: 0
   fromBottom: 0
   fromLeft: 0
   fromRight: 1
-  gameOverManager: {fileID: 0}
+  gameOverManager: {fileID: 1882654174}
   squeezeDistance: 0.5
   blockerMask:
     serializedVersion: 2
@@ -7415,6 +7371,39 @@ Transform:
   m_LocalScale: {x: 2.6104188, y: 2.911616, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1650969170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650969171}
+  m_Layer: 0
+  m_Name: Porte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1650969171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650969170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.45335, y: -6.24054, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1981400525}
+  - {fileID: 1982516720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1728235421
@@ -8322,12 +8311,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981400523}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.03, y: 0.73, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4233513, y: 6.97054, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1650969171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1981400526
 MonoBehaviour:
@@ -8341,20 +8330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8db0055a988840228c6507ee52edddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleporteController
-  destinationsAleatoires:
-  - nomScene: SceneMine
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneChateau
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneIce
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneJungle
-    spawnId: NextStage
-    poids: 1
-  exclureSceneCourante: 1
+  sequenceSpawnId: SceneMine_to_SceneChateau
 --- !u!61 &1981400527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8545,12 +8521,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982516717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.36, y: 0.63, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 60.90665, y: 6.87054, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1650969171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1982516721
 MonoBehaviour:
@@ -8564,18 +8540,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b88924fea847558ca4b6490ab34ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPoint
-  spawnId: NextStage
+  spawnId: SceneJungle_to_SceneMine
   preserveZ: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1943544147}
-  - {fileID: 1981400525}
-  - {fileID: 1982516720}
+  - {fileID: 1954404700}
+  - {fileID: 1650969171}
   - {fileID: 1882654176}
   - {fileID: 1288085495}
   - {fileID: 707331810}
-  - {fileID: 1194696499}
   - {fileID: 627669801}
-  - {fileID: 1954404700}

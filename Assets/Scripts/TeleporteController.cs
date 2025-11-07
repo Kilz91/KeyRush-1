@@ -5,27 +5,10 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider2D))]
 public class TeleporteController : MonoBehaviour
 {
-
-    [Serializable]
-    public struct CibleScene
-    {
-        [Tooltip("Nom de la scène à charger (dans Build Settings)")]
-        public string nomScene;
-
-        [Tooltip("ID du SpawnPoint dans la scène cible")]
-        public string spawnId;
-
-        [Tooltip("Poids pour le tirage aléatoire (>= 0). 0 = ignoré")]
-        public float poids;
-    }
-
-    [Header("Scenes aléatoires uniquement")]
-    [Tooltip("Liste des destinations possibles. Une sera choisie au hasard (pondéré par 'poids').")]
-    [SerializeField] private CibleScene[] destinationsAleatoires;
-
+    [Header("Progression séquentielle")] 
     [SerializeField]
-    [Tooltip("Exclure la scène courante lors du tirage aléatoire")]
-    private bool exclureSceneCourante = true;
+    [Tooltip("ID du SpawnPoint à utiliser dans la scène suivante (doit exister dans la scène suivante)")]
+    private string sequenceSpawnId;
 
     private void Reset()
     {
@@ -57,75 +40,42 @@ public class TeleporteController : MonoBehaviour
             yield break;
         }
 
-        // otherwise proceed to choose and load a scene
-        ChargerSceneAleatoire();
+        // progression séquentielle uniquement
+        ChargerSceneSuivante(player);
     }
 
-    private void ChargerSceneAleatoire()
+    private void ChargerSceneSuivante(GameObject player)
     {
-        if (destinationsAleatoires == null || destinationsAleatoires.Length == 0)
+        var active = SceneManager.GetActiveScene();
+        int idx = active.buildIndex;
+
+        if (idx < 0)
         {
-            Debug.LogWarning($"{nameof(TeleporteController)} sur {name}: aucune destination aléatoire configurée.", this);
+            Debug.LogWarning($"{nameof(TeleporteController)} sur {name}: scène active non listée dans les Build Settings.", this);
             return;
         }
 
-        string sceneCourante = SceneManager.GetActiveScene().name;
+        int nextIndex = idx + 1;
+        int total = SceneManager.sceneCountInBuildSettings;
 
-        // Filtrer les cibles valides et accumuler le poids total
-        float sommePoids = 0f;
-        for (int i = 0; i < destinationsAleatoires.Length; i++)
+        if (nextIndex >= total)
         {
-            var c = destinationsAleatoires[i];
-            if (string.IsNullOrWhiteSpace(c.nomScene)) continue;
-            if (exclureSceneCourante && c.nomScene == sceneCourante) continue;
-            if (c.poids <= 0f) continue;
-            sommePoids += c.poids;
-        }
-
-        if (sommePoids <= 0f)
-        {
-            Debug.LogWarning($"{nameof(TeleporteController)} sur {name}: aucune cible valide pour le tirage.", this);
+            // Dernière scène atteinte -> déléguer la victoire au WinManager
+            if (WinManager.Instance != null)
+            {
+                WinManager.Instance.TriggerWin(player);
+            }
+            else
+            {
+                Debug.Log($"{nameof(TeleporteController)}: dernière scène atteinte, WinManager absent.", this);
+            }
             return;
         }
 
-        // Tirage au sort pondéré
-        float tirage = UnityEngine.Random.Range(0f, sommePoids);
-        float cumul = 0f;
-        CibleScene cibleChoisie = default;
-        bool trouve = false;
-        for (int i = 0; i < destinationsAleatoires.Length; i++)
-        {
-            var c = destinationsAleatoires[i];
-            if (string.IsNullOrWhiteSpace(c.nomScene)) continue;
-            if (exclureSceneCourante && c.nomScene == sceneCourante) continue;
-            if (c.poids <= 0f) continue;
-            cumul += c.poids;
-            if (tirage <= cumul)
-            {
-                cibleChoisie = c;
-                trouve = true;
-                break;
-            }
-        }
+        // Charger la scène suivante par index
+        if (!string.IsNullOrEmpty(sequenceSpawnId))
+            SceneSpawnManager.SetNext(sequenceSpawnId);
 
-        if (!trouve)
-        {
-            Debug.LogWarning($"{nameof(TeleporteController)} sur {name}: tirage invalide, fallback première cible valide.", this);
-            // Fallback simple: première cible valide
-            for (int i = 0; i < destinationsAleatoires.Length; i++)
-            {
-                var c = destinationsAleatoires[i];
-                if (!string.IsNullOrWhiteSpace(c.nomScene) && (!exclureSceneCourante || c.nomScene != sceneCourante) && c.poids > 0f)
-                {
-                    cibleChoisie = c;
-                    trouve = true;
-                    break;
-                }
-            }
-            if (!trouve) return;
-        }
-
-        SceneSpawnManager.SetNext(cibleChoisie.spawnId);
-        SceneManager.LoadScene(cibleChoisie.nomScene);
+        SceneManager.LoadScene(nextIndex);
     }
 }

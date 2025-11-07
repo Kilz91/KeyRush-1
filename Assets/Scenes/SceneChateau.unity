@@ -119,6 +119,39 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &168653195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168653196}
+  m_Layer: 0
+  m_Name: Porte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168653196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168653195}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.45335, y: -6.24054, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1981400525}
+  - {fileID: 1982516720}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &280240217
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,11 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd2472625c30c74d9a44800bf1d1b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShrinkingWall
-  speed: 0.1
-  expandSpeed: 0.1
+  speed: 1
+  expandSpeed: 0
   fromTop: 0
   fromBottom: 0
-  fromLeft: 0
+  fromLeft: 1
   fromRight: 0
   gameOverManager: {fileID: 914382282}
   squeezeDistance: 0.5
@@ -33038,7 +33071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WinManager
   winSprite: {fileID: 1737685246}
   winCameraPosition: {x: 0, y: 0, z: -10}
-  doorsToWin: 5
+  doorsToWin: 6
 --- !u!212 &1737685248
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33086,7 +33119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -804355145038162961, guid: d9c0b4fd15f99f94cbd76e38f9eae30d, type: 3}
+  m_Sprite: {fileID: 4846896553144377880, guid: 16659ddeea8b62c4c8492e1b0675609f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -33106,8 +33139,8 @@ Transform:
   m_GameObject: {fileID: 1737685246}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.6, y: -26.7, z: 0}
-  m_LocalScale: {x: 2.7856166, y: 2.7070074, z: 1}
+  m_LocalPosition: {x: 19.6591, y: 22.2386, z: 0}
+  m_LocalScale: {x: 1.5855294, y: 1.5840642, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47388,12 +47421,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981400523}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.8, y: -35.21, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.34664917, y: -28.96946, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 168653196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1981400526
 MonoBehaviour:
@@ -47407,20 +47440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8db0055a988840228c6507ee52edddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleporteController
-  destinationsAleatoires:
-  - nomScene: SceneIce
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneChateau
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneJungle
-    spawnId: NextStage
-    poids: 1
-  - nomScene: SceneMine
-    spawnId: NextStage
-    poids: 1
-  exclureSceneCourante: 1
+  sequenceSpawnId: 
 --- !u!61 &1981400527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -47624,12 +47644,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982516717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.47, y: -53.63, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -81.923355, y: -47.38946, z: 0}
   m_LocalScale: {x: 1.0867691, y: 1.067163, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 168653196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1982516721
 MonoBehaviour:
@@ -47643,7 +47663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b88924fea847558ca4b6490ab34ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPoint
-  spawnId: NextStage
+  spawnId: SceneMine_to_SceneChateau
   preserveZ: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -47651,9 +47671,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1899569357}
   - {fileID: 1943544147}
-  - {fileID: 1981400525}
-  - {fileID: 1982516720}
+  - {fileID: 1633061320}
+  - {fileID: 168653196}
   - {fileID: 914382284}
   - {fileID: 1737685249}
-  - {fileID: 1633061320}
   - {fileID: 280240219}

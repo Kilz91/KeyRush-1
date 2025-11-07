@@ -10,6 +10,11 @@ public class TeleporteController : MonoBehaviour
     [Tooltip("ID du SpawnPoint à utiliser dans la scène suivante (doit exister dans la scène suivante)")]
     private string sequenceSpawnId;
 
+    [Header("Fin de jeu")]
+    [SerializeField]
+    [Tooltip("Nom de la scène à charger quand on atteint la dernière scène (victoire)")]
+    private string winSceneName = "SceneWin"; // Assure-toi d'ajouter la scène dans les Build Settings
+
     private void Reset()
     {
         // S'assurer que le collider est configuré en "Is Trigger" pour une zone de téléportation 2D
@@ -61,14 +66,24 @@ public class TeleporteController : MonoBehaviour
 
         if (nextIndex >= total)
         {
-            // Dernière scène atteinte -> déléguer la victoire au WinManager
-            if (WinManager.Instance != null)
+            // Dernière scène atteinte -> charger la scène de victoire si configurée, sinon fallback WinManager
+            if (!string.IsNullOrEmpty(winSceneName))
             {
-                WinManager.Instance.TriggerWin(player);
+                // Assurer le temps normal au cas où il aurait été mis en pause
+                if (Time.timeScale == 0f) Time.timeScale = 1f;
+                SceneManager.LoadScene(winSceneName);
             }
             else
             {
-                Debug.Log($"{nameof(TeleporteController)}: dernière scène atteinte, WinManager absent.", this);
+                // Fallback ancien comportement
+                if (WinManager.Instance != null)
+                {
+                    WinManager.Instance.TriggerWin(player);
+                }
+                else
+                {
+                    Debug.Log($"{nameof(TeleporteController)}: dernière scène atteinte, WinManager absent et aucune winSceneName fournie.", this);
+                }
             }
             return;
         }

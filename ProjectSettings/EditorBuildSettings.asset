@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneChateau.unity
     guid: d61dbe08b9405324191f38f50ca1f097
+  - enabled: 1
+    path: Assets/Scenes/SceneWin.unity
+    guid: 4335b72be692e4a039349285e1d40092
+  - enabled: 1
+    path: Assets/Scenes/SceneLose.unity
+    guid: 76256b02760284009aca102fb312bf3b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

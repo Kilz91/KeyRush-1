@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         // Mouvement horizontal: on applique la vitesse sur X uniquement
         // (velocity est l'API publique; linearVelocity était interne/legacy)
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+    rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         animator.SetFloat("speed", Mathf.Abs(horizontal));
         animator.SetBool("IsGrounded", IsGrounded());
     }

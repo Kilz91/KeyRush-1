@@ -12544,13 +12544,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914382281}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a626875994dbe40beb4f673df63cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
   gameOverSprite: {fileID: 914382281}
   gameOverCameraPosition: {x: 0, y: 0, z: -10}
+  loseSceneName: SceneLose
 --- !u!212 &914382283
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47433,6 +47434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleporteController
   sequenceSpawnId: 
+  winSceneName: SceneWin
 --- !u!61 &1981400527
 BoxCollider2D:
   m_ObjectHideFlags: 0

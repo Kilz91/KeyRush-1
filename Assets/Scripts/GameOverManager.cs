@@ -10,6 +10,10 @@ public class GameOverManager : MonoBehaviour
     [Tooltip("Camera position to use when showing Game Over (optional)")]
     public Vector3 gameOverCameraPosition = new Vector3(0f, 0f, -10f);
 
+    [Header("Fin de jeu")]
+    [Tooltip("Nom de la scène à charger en cas de défaite (Game Over)")]
+    public string loseSceneName = "SceneLose"; // Assure-toi d'ajouter la scène dans les Build Settings
+
     void Awake()
     {
         // Mise en place du singleton GameOverManager (un seul actif)
@@ -45,7 +49,15 @@ public class GameOverManager : MonoBehaviour
             if (col != null) col.enabled = false;
         }
 
-        // Activate sprite (if assigned) and bring camera to the desired position
+        // Nouveau flux: charger une scène de défaite si configurée
+        if (!string.IsNullOrEmpty(loseSceneName))
+        {
+            if (Time.timeScale == 0f) Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(loseSceneName);
+            return;
+        }
+
+        // Fallback ancien comportement: afficher un overlay de Game Over et bouger la caméra
         if (gameOverSprite != null)
         {
             // Si un sprite d'overlay est assigné, on l'affiche au centre de la caméra

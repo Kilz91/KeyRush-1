@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         // Détection sol simple avec capsule Overlap (peut être affinée si besoin)
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1f, 1f), CapsuleDirection2D.Horizontal, 0f, groundLayer);
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1f, .1f), CapsuleDirection2D.Horizontal, 0f, groundLayer);
     }
 
 }
